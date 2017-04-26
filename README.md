@@ -1,4 +1,4 @@
-#Angular at its most simple
+# Angular at its most simple
 
 This repo is a reminder of the lessons learned in the [Code School](http://campus.codeschool.com/courses/shaping-up-with-angularjs/level/1/section/1/video/1) Angular course.
 
