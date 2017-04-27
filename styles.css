@@ -3,3 +3,13 @@
   border-bottom: 2px solid #f00;
   color: #333;
 }
+
+/* Use Angular validations to highlight whether
+   a form has invalid inputs */
+.ng-invalid.ng-pristine {
+  border-color: #fa787e;
+}
+
+.ng-valid.ng-dirty {
+  border-color: #78fa89;
+}

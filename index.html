@@ -45,6 +45,40 @@
           </div>
         </div>
       </section>
+
+      <!-- Create a new definition -->
+      <!-- newWordCtrl is just an alias for the controller, it's common to use Ctrl when making controller aliases -->
+      <!-- newWordForm.$valid within the ng-submit ensures that the form has content in the required fields (word and definition), otherwise it won't submit -->
+      <form name="newWordForm" ng-controller="NewWordController as newWordCtrl" ng-submit="newWordForm.$valid && newWordCtrl.addNewWord()" novalidate>
+        <!-- pre-save preview -->
+        <blockquote>
+          <p>Name: {{ newWordCtrl.newWord.name }}</p>
+          <p>Definition: {{ newWordCtrl.newWord.meaning }}</p>
+          <p>Sample: {{ newWordCtrl.newWord.sample }}</p>
+          <p>Comments: {{ newWordCtrl.newWord.comment }}</p>
+        </blockquote>
+        <div class="form-group">
+          <label>Word</label>
+          <input type="text" class="form-control" ng-model="newWordCtrl.newWord.name" required/>
+        </div>
+
+        <div class="form-group">
+          <label>Definition</label>
+          <textarea class="form-control" ng-model="newWordCtrl.newWord.meaning" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <Label>Sample sentence</Label>
+          <textarea class="form-control" ng-model="newWordCtrl.newWord.sample"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Comments</label>
+          <textarea class="form-control" ng-model="newWordCtrl.newWord.comment"></textarea>
+        </div>
+        <input type="submit" value="Submit" />
+        <div> newWordForm is {{ newWordForm.$valid }} </div>
+      </form>
     </div>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>

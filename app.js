@@ -24,6 +24,14 @@
     }
   });
 
+  app.controller('NewWordController', function() {
+    this.newWord = {}; // This handles the form you use to make a new word, stores the word information here temporarily until it's either submitted or removed.
+    this.addNewWord = function() {
+      definitions.push(this.newWord); // Push the new word to the definitions array.
+      this.newWord = {} // Resets the form to be blank after submitting the new word.
+    };
+  });
+
   // Think of this simply as the data
   var definitions = [
     {
