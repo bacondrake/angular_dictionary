@@ -10,15 +10,41 @@
 
   <body>
     <div class="container" ng-controller="DictionaryController as dictionary">
-      <h1>Dictionary</h1>
-      <div ng-repeat="word in dictionary.words">
-        <h3>{{word.name}}</h3>
-        <small><em>{{word.comment}}</em></small>
-        <p>{{word.meaning}}</p>
-        <p><em>{{word.sample}}</em></p>
-        <button class="btn btn-success btn-sm" ng-hide="word.memorised">Word not yet memorised</button>
-        <button class="btn btn-primary btn-sm" ng-show="word.memorised">Word has been memorised</button>
-      </div>
+      <!-- Navigation -->
+      <section ng-controller="PanelController as panel">
+        <ul class="nav nav-pills">
+          <!-- Use the ng-class directive to set the active-pill class on the menu item (pill) that's active ** NB. because active-pill has a hyphen, need to surround it in single quotes, otherwise it won't work. Non-hyphenated classes don't need this -->
+          <li ng-class="{ 'active-pill':panel.isSelected(1) }"><a href ng-click="panel.selectTab(1)">Not memorised</a></li>
+          <li ng-class="{ 'active-pill':panel.isSelected(2) }"><a href ng-click="panel.selectTab(2)">Memorised</a></li>
+        </ul>
+        <!-- {{ tab }} // Print the tab value (1, 2, etc) to the page (for debugging) -->
+        <!-- Panel for un-memorised words -->
+        <div class="panel" ng-show="panel.isSelected(1)">
+          <div ng-repeat="word in dictionary.words | orderBy:'name'"><!-- When using orderBy in Angular, you can put a minus in front of name to sort in descending order (e.g. orderBy:'-name') -->
+            <div ng-hide="word.memorised">
+              <h3>{{word.name}}</h3>
+              <button class="btn btn-success btn-sm pull-right" ng-hide="word.memorised">Word not yet memorised</button>
+              <button class="btn btn-primary btn-sm pull-right" ng-show="word.memorised">Word has been memorised</button>
+              <small><em>{{word.comment}}</em></small>
+              <p>{{word.meaning}}</p>
+              <p><em>{{word.sample}}</em></p>
+            </div>
+          </div>
+        </div>
+        <!-- Panel for memorised words -->
+        <div class="panel" ng-show="panel.isSelected(2)">
+          <div ng-repeat="word in dictionary.words | orderBy:'name'"><!-- When using orderBy in Angular, you can put a minus in front of name to sort in descending order (e.g. orderBy:'-name') -->
+            <div ng-show="word.memorised">
+              <h3>{{word.name}}</h3>
+              <button class="btn btn-success btn-sm pull-right" ng-hide="word.memorised">Word not yet memorised</button>
+              <button class="btn btn-primary btn-sm pull-right" ng-show="word.memorised">Word has been memorised</button>
+              <small><em>{{word.comment}}</em></small>
+              <p>{{word.meaning}}</p>
+              <p><em>{{word.sample}}</em></p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
